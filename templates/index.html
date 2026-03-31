@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lightweight Quiz</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; display: inline-block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .results { margin-top: 20px; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>{{ data.question }}</h2>
+        <form action="/vote" method="POST">
+            {% for option in data.options %}
+                <button type="submit" name="quiz_option" value="{{ option }}">{{ option }}</button>
+            {% endfor %}
+        </form>
+
+        <div class="results">
+            <h3>Current Standings:</h3>
+            {% for option, count in data.votes.items() %}
+                <p><strong>{{ option }}:</strong> {{ count }} votes</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
